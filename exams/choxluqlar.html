@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta name="google-adsense-account" content="ca-pub-4918747886255127">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4918747886255127"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural ədədlər sınağı.</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .question img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+        .timer {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: red;
+        }
+        .button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Onlayn Sınaq</h1>
+        <div id="timer" class="timer">Vaxt qaldı: 10:00</div>
+        <div id="question-container"></div>
+        <button id="submit-button" class="button" onclick="submitAnswers()">Bitir.</button>
+        <div id="result" class="result"></div>
+        <div id="unanswered" class="result"></div>
+    </div>
+
+    <script>
+        let questions = [];
+        let timerInterval;
+
+        async function fetchQuestions() {
+            try {
+                const response = await fetch('coxluqlar.json'); // Replace with your JSON file
+                return await response.json();
+            } catch (error) {
+                console.error('Suallar yüklənməsində problem oldu.:', error);
+                return [];
+            }
+        }
+
+        async function loadQuestions() {
+            const container = document.getElementById("question-container");
+            questions = await fetchQuestions();
+
+            if (questions.length === 0) {
+                container.innerHTML = '<p>Suallar mövcud deyil.</p>';
+                return;
+            }
+
+            questions.forEach((question, index) => {
+                const div = document.createElement("div");
+                div.classList.add("question");
+
+                if (question.options) {
+                    div.innerHTML = `
+                        <p>${index + 1}. ${question.text}</p>
+                        ${question.image ? `<img src="${question.image}" alt="Question Image">` : ""}
+                        ${question.options.map((option, i) => `
+                            <label>
+                                <input type="radio" name="q${question.id}" value="${i}">
+                                ${option}
+                            </label><br>
+                        `).join("")}
+                    `;
+                } else {
+                    div.innerHTML = `
+                        <p>${index + 1}. ${question.text}</p>
+                        ${question.image ? `<img src="${question.image}" alt="Question Image">` : ""}
+                        <textarea placeholder="Cavabınızı yalnız ədəd olaraq qeyd edin." style="width:100%;height:80px;margin-top:10px;"></textarea>
+                    `;
+                }
+                container.appendChild(div);
+            });
+        }
+
+        function startTimer(duration) {
+            const timerElement = document.getElementById("timer");
+            let time = duration;
+
+            timerInterval = setInterval(() => {
+                const minutes = Math.floor(time / 60);
+                const seconds = time % 60;
+                timerElement.textContent = `Vaxt qaldı: ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+
+                if (time <= 0) {
+                    clearInterval(timerInterval);
+                    timerElement.textContent = "Vaxt bitdi!";
+                    submitAnswers();
+                }
+
+                time--;
+            }, 1000);
+        }
+
+        function submitAnswers() {
+            clearInterval(timerInterval);
+            const submitButton = document.getElementById("submit-button");
+            submitButton.disabled = true;
+            submitButton.textContent = "Tamamlandı";
+
+            let score = 0;
+            let incorrect = 0;
+            let unanswered = 0;
+
+            const questionDivs = Array.from(document.querySelectorAll(".question"));
+
+            questionDivs.forEach((div, index) => {
+                const question = questions[index];
+                const selectedOption = div.querySelector(`input[name="q${question.id}"]:checked`);
+                const textAnswer = div.querySelector("textarea");
+
+                if (question.options && selectedOption) {
+                    const correctIndex = question.correct;
+                    if (parseInt(selectedOption.value) === correctIndex) {
+                        score++;
+                        selectedOption.parentElement.classList.add("correct");
+                    } else {
+                        incorrect++;
+                        selectedOption.parentElement.classList.add("incorrect");
+                        const correctLabel = div.querySelector(`label:nth-child(${correctIndex + 1})`);
+                        if (correctLabel) correctLabel.style.color = "green";
+                        div.innerHTML += `<p class="correct">Düzgün cavablar: ${question.options[correctIndex]}</p>`;
+                    }
+                } else if (question.options && !selectedOption) {
+                    unanswered++;
+                    const correctIndex = question.correct;
+                    div.innerHTML += `<p class="incorrect">Cavab qeyd olunmayıb.</p>`;
+                    div.innerHTML += `<p class="correct">Düzgün cavablar: ${question.options[correctIndex]}</p>`;
+                } else if (!question.options && textAnswer) {
+                    if (textAnswer.value.trim()) {
+                        if (question.correctAnswer && textAnswer.value.trim().toLowerCase() === question.correctAnswer.toLowerCase()) {
+                            score++;
+                            div.innerHTML += `<p class="correct">Düzgündür!</p>`;
+                        } else {
+                            incorrect++;
+                            div.innerHTML += `<p class="incorrect">Cavabınız: ${textAnswer.value}</p>`;
+                            div.innerHTML += `<p class="correct">Düzgün cavab: ${question.correctAnswer || "Not provided."}</p>`;
+                        }
+                    } else {
+                        unanswered++;
+                        div.innerHTML += `<p class="incorrect">Cavab qeyd olunmayıb.</p>`;
+                        div.innerHTML += `<p class="correct">Düzgün cavab: ${question.correctAnswer || "Not provided."}</p>`;
+                    }
+                }
+            });
+
+            document.getElementById("result").textContent = `Düzgün: ${score}, Səhv: ${incorrect}`;
+            document.getElementById("unanswered").textContent = `Cavablandırılmamış: ${unanswered}`;
+        }
+
+        loadQuestions();
+        startTimer(600); // 10 minutes countdown
+    </script>
+</body>
+</html>

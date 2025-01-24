@@ -1,0 +1,117 @@
+[
+    {
+        "id": 1,
+        "text": "3-ə böldükdə qalıqda 1, 4-ə böldükdə qalıqda 3, 5-ə böldükdə qalıqda qalıqda 4 alınan ən kiçik natural ədədi tapın.",
+        "options": ["16", "7", "19", "4","39"],
+        "correct": 2
+    },
+    {
+        "id": 2,
+        "text": "ƏKOB(a;b)=36, ƏKOB(a;m)=24 və ƏBOB(a;b)= ƏBOB(a;m) olarsa,b/m-i tapın.",
+        "options": ["1", "3/2", "5/3", "2/3","1/3"],
+        "correct": 1
+    },
+    {
+        "id": 3,
+        "image": "Screenshot 2025-01-23 204914.png",
+        "text": "ƏKOB(a;b)=36, ƏKOB(a;m)=24 və ƏBOB(a;b)= ƏBOB(a;m) olarsa, a və b-nin ortaq olmayan sadə vuruqlarının hasilini tapın.",
+        "options": ["9", "8", "7", "6","5"],
+        "correct": 0
+    },
+    {
+        "id": 4,
+        "text": "Ədədi 40-a böldükdə qalıqda 17 alınır, bu ədədin 8-ə bölünməsindən alınan qalığı tapın.",
+        "options": ["1", "2", "3", "7","17"],
+        "correct": 0
+    },
+    {
+        "id": 5,
+        "text": "4a=3b və ƏKOB(a;b)=60 olarsa, a-nı tapın.",
+        "options": ["10", "15", "25", "30","35"],
+        "correct": 1
+    },
+    {
+        "id": 6,
+        "text": "A=3‧4‧5‧6‧7+27 ədədinin 18-ə bölünməsindən alınan qalığı tapın. ",
+        "options": ["7", "9", "5", "3","6"],
+        "correct": 1
+    },
+    {
+        "id": 7,
+        "text": "m və n sadə ədədlərdir və m≠n olarsa, m‧n hasilinin neçə sadə böləni var?",
+        "options": ["1", "2", "3", "4","5"],
+        "correct": 1
+    },
+    {
+        "id": 8,
+        "text": "İkirəqəmli ədədin onluqlarının sayını 6 vahid artırdıqda ədəd 6 dəfə artır. İkirəqəmli ədədin rəqəmləri hasilini tapın. ",
+        "options": ["2", "3", "4", "6","8"],
+        "correct": 0
+    },
+    {
+        "id": 9,
+        "text": "k və  n  natural ədədlər, x=3k+2=4n+3 olarsa, x-in ən kiçik qiymətini tapın. ",
+        "options": ["13", "12", "11", "7","5"],
+        "correct": 2
+    },
+    {
+        "id": 10,
+        "text": "180 ədədinin natural bölənlərindən neçəsi 3-ə bölünmür?  ",
+        "options": ["18", "12", "9", "6","3"],
+        "correct": 3
+    },
+    {
+        "id": 11,
+        "text": "176 ədədinin neçə müxtəlif sadə böləni var? ",
+        "options": ["2", "3", "4", "5","6"],
+        "correct": 0
+    },
+    {
+        "id": 12,
+        "text": "a/b=2/3 və ƏKOB(a;b)=42 olarsa, a-nı tapın.",
+        "options": ["10", "14", "18", "20","24"],
+        "correct":1
+    },
+    {
+        "id": 13,
+        "text": "18-dən kiçik və 18 ilə qarşılıqlı sadə neçə natural ədəd var? ",
+        "options": ["1", "3", "9", "6","12"],
+        "correct": 3
+    },
+    {
+        "id": 14,
+        "text": "n/6,n/7,n/9 ədədləri natural ədəd olarsa, n-inən kiçik qiymətinin rəqəmləri cəmini tapın. ",
+        "correctAnswer": "126"
+    },
+    {
+        "id":15,
+        "text": "Natamam qismət 5 və qalıq 4 olarsa, bölünənin ən kiçik qiymətini tapın. ",
+        "correctAnswer": "29"
+    },
+    {
+        "id":16,
+        "text": "n-in neçə natural qiymətində (n+12)/n ifadəsinin qiyməti natural ədəd olar?",
+        "correctAnswer": "6"
+    },
+    {
+        "id":17,
+        "text": "51^8 ədədinin natural bölənlərinin sayını tapın.",
+        "correctAnswer": "81"
+    },
+    {
+        "id":18,
+        "text": "a-nı 6-ya böldükdə qismətdə b və qalıqda 2, b-ni 14-ə böldükdə isə qalıqda 6 alınır. a-nın 21-ə bölünməsindən alınan qalığı tapın. ",
+        "correctAnswer": "17"
+    },
+    {
+        "id":19,
+        "text": "Rəqəmləri cəminin üç mislinə bərabər olan ikirəqəmli ədədi tapın. ",
+        "correctAnswer": "27"
+    }
+    ,
+    {
+        "id":20,
+        "text": "İkirəqəmli ədədin əvvəlinə 6 yazdıqda ədəd 25 dəfə artır. İkirəqəmli ədədin rəqəmləri hasilini tapın. ",
+        "correctAnswer": "10"
+    }
+]
